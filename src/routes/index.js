@@ -145,23 +145,15 @@ export default function Router() {
       path: '*',
       element: <LogoOnlyLayout />,
       children: [
-        { path: 'coming-soon', element: <ComingSoon /> },
-        { path: 'maintenance', element: <Maintenance /> },
-        { path: 'pricing', element: <Pricing /> },
-        { path: 'payment', element: <Payment /> },
-        { path: '500', element: <Page500 /> },
-        { path: '404', element: <NotFound /> },
-        { path: '*', element: <Navigate to="/404" replace /> }
+        // { path: 'coming-soon', element: <ComingSoon /> },
+        { path: '*', element: <Navigate to="/" replace /> }
       ]
     },
     {
       path: '/',
       element: <MainLayout />,
       children: [
-        { element: <LandingPage /> },
-        { path: 'about-us', element: <About /> },
-        { path: 'contact-us', element: <Contact /> },
-        { path: 'faqs', element: <Faqs /> },
+        { element: <Login /> },
         {
           path: 'components',
           children: [
@@ -219,7 +211,7 @@ export default function Router() {
         }
       ]
     },
-    { path: '*', element: <Navigate to="/404" replace /> }
+    { path: '*', element: <Navigate to="/" replace /> }
   ]);
 }
 
@@ -254,17 +246,7 @@ const Chat = Loadable(lazy(() => import('../pages/dashboard/Chat')));
 const Mail = Loadable(lazy(() => import('../pages/dashboard/Mail')));
 const Calendar = Loadable(lazy(() => import('../pages/dashboard/Calendar')));
 const Kanban = Loadable(lazy(() => import('../pages/dashboard/Kanban')));
-// Main
-const LandingPage = Loadable(lazy(() => import('../pages/LandingPage')));
-const About = Loadable(lazy(() => import('../pages/About')));
-const Contact = Loadable(lazy(() => import('../pages/Contact')));
-const Faqs = Loadable(lazy(() => import('../pages/Faqs')));
-const ComingSoon = Loadable(lazy(() => import('../pages/ComingSoon')));
-const Maintenance = Loadable(lazy(() => import('../pages/Maintenance')));
-const Pricing = Loadable(lazy(() => import('../pages/Pricing')));
-const Payment = Loadable(lazy(() => import('../pages/Payment')));
-const Page500 = Loadable(lazy(() => import('../pages/Page500')));
-const NotFound = Loadable(lazy(() => import('../pages/Page404')));
+
 // Components
 const ComponentsOverview = Loadable(lazy(() => import('../pages/ComponentsOverview')));
 const Color = Loadable(lazy(() => import('../pages/components-overview/foundations/FoundationColors')));
