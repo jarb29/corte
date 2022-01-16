@@ -104,6 +104,8 @@ export default function FoundationColors() {
     }
   };
 
+  console.log(PATH_PAGE.components);
+
   return (
     <RootStyle title="Foundations: Color | Minimal-UI">
       <Box

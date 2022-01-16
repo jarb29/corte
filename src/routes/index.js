@@ -1,9 +1,8 @@
 import { Suspense, lazy } from 'react';
 import { Navigate, useRoutes, useLocation } from 'react-router-dom';
 // layouts
-import MainLayout from '../layouts/main';
 import DashboardLayout from '../layouts/dashboard';
-import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
+// import LogoOnlyLayout from '../layouts/LogoOnlyLayout';
 // guards
 import GuestGuard from '../guards/GuestGuard';
 import AuthGuard from '../guards/AuthGuard';
@@ -62,8 +61,7 @@ export default function Router() {
         },
         { path: 'login-unprotected', element: <Login /> },
         { path: 'register-unprotected', element: <Register /> },
-        { path: 'reset-password', element: <ResetPassword /> },
-        { path: 'verify', element: <VerifyCode /> }
+        { path: 'reset-password', element: <ResetPassword /> }
       ]
     },
 
@@ -82,6 +80,7 @@ export default function Router() {
         { path: 'analytics', element: <GeneralAnalytics /> },
         { path: 'banking', element: <GeneralBanking /> },
         { path: 'booking', element: <GeneralBooking /> },
+        { path: 'components', element: <ComponentsOverview /> },
 
         {
           path: 'e-commerce',
@@ -136,29 +135,13 @@ export default function Router() {
           ]
         },
         { path: 'calendar', element: <Calendar /> },
-        { path: 'kanban', element: <Kanban /> }
-      ]
-    },
+        { path: 'kanban', element: <Kanban /> },
 
-    // Main Routes
-    {
-      path: '*',
-      element: <LogoOnlyLayout />,
-      children: [
-        // { path: 'coming-soon', element: <ComingSoon /> },
-        { path: '*', element: <Navigate to="/" replace /> }
-      ]
-    },
-    {
-      path: '/',
-      element: <MainLayout />,
-      children: [
-        { element: <Login /> },
         {
           path: 'components',
           children: [
-            { element: <ComponentsOverview /> },
-            // FOUNDATIONS
+            // FOUNDATIOS
+            { path: 'color', element: <Color /> },
             { path: 'color', element: <Color /> },
             { path: 'typography', element: <Typography /> },
             { path: 'shadows', element: <Shadows /> },
@@ -211,7 +194,22 @@ export default function Router() {
         }
       ]
     },
-    { path: '*', element: <Navigate to="/" replace /> }
+
+    // Main Routes
+
+    {
+      path: '/dashboard',
+      children: [
+        {
+          element: (
+            <AuthGuard>
+              <Login />
+            </AuthGuard>
+          )
+        }
+      ]
+    },
+    { path: '*', element: <Navigate to="/dashboard" replace /> }
   ]);
 }
 
@@ -221,7 +219,6 @@ export default function Router() {
 const Login = Loadable(lazy(() => import('../pages/authentication/Login')));
 const Register = Loadable(lazy(() => import('../pages/authentication/Register')));
 const ResetPassword = Loadable(lazy(() => import('../pages/authentication/ResetPassword')));
-const VerifyCode = Loadable(lazy(() => import('../pages/authentication/VerifyCode')));
 // Dashboard
 const GeneralApp = Loadable(lazy(() => import('../pages/dashboard/GeneralApp')));
 const GeneralEcommerce = Loadable(lazy(() => import('../pages/dashboard/GeneralEcommerce')));

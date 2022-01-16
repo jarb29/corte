@@ -14,6 +14,8 @@ const initialState = {
   user: null
 };
 
+console.log(initialState);
+
 const handlers = {
   INITIALIZE: (state, action) => {
     const { isAuthenticated, user } = action.payload;

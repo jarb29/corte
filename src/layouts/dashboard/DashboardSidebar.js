@@ -3,12 +3,12 @@ import { useEffect } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 // material
 import { alpha, styled } from '@mui/material/styles';
-import { Box, Link, Stack, Button, Drawer, Tooltip, Typography, CardActionArea } from '@mui/material';
+import { Box, Link, Stack, Drawer, Tooltip, Typography, CardActionArea } from '@mui/material';
 // hooks
 import useAuth from '../../hooks/useAuth';
 import useCollapseDrawer from '../../hooks/useCollapseDrawer';
 // routes
-import { PATH_DASHBOARD, PATH_DOCS } from '../../routes/paths';
+import { PATH_DASHBOARD } from '../../routes/paths';
 // components
 import Logo from '../../components/Logo';
 import MyAvatar from '../../components/MyAvatar';
@@ -173,9 +173,6 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
               <br /> Please check our docs
             </Typography>
           </div>
-          <Button href={PATH_DOCS} target="_blank" variant="contained">
-            Documentation
-          </Button>
         </Stack>
       )}
     </Scrollbar>

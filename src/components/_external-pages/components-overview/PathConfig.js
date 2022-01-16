@@ -1,10 +1,12 @@
 import { paramCase } from 'change-case';
 
+import { PATH_PAGE } from '../../../routes/paths';
+
 // ----------------------------------------------------------------------
 
 export const FOUNDATION_LIST = ['Color', 'Typography', 'Shadows', 'Grid', 'Icons'].map((item) => ({
   name: item,
-  href: `/components/${paramCase(item)}`,
+  href: `${PATH_PAGE.components}/${paramCase(item)}`,
   icon: `/static/components/${paramCase(item)}.png`
 }));
 
@@ -21,7 +23,7 @@ export const EXTRA_LIST = [
   'Form Validation'
 ].map((item) => ({
   name: item,
-  href: `/components/${paramCase(item)}`,
+  href: `${PATH_PAGE.components}/${paramCase(item)}`,
   icon: `/static/components/${paramCase(item)}.png`
 }));
 
@@ -59,6 +61,6 @@ export const MATERIAL_LIST = [
   'Data Grid'
 ].map((item) => ({
   name: item,
-  href: `/components/${paramCase(item)}`,
+  href: `${PATH_PAGE.components}/${paramCase(item)}`,
   icon: `/static/components/${paramCase(item)}.png`
 }));

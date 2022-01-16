@@ -1,9 +1,9 @@
 import { Icon } from '@iconify/react';
 import homeFill from '@iconify/icons-eva/home-fill';
 import fileFill from '@iconify/icons-eva/file-fill';
-import roundGrain from '@iconify/icons-ic/round-grain';
+// import roundGrain from '@iconify/icons-ic/round-grain';
 // routes
-import { PATH_AUTH, PATH_PAGE, PATH_DASHBOARD } from '../../routes/paths';
+import { PATH_AUTH, PATH_DASHBOARD } from '../../routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -17,11 +17,6 @@ const menuConfig = [
     title: 'Home',
     icon: <Icon icon={homeFill} {...ICON_SIZE} />,
     path: '/'
-  },
-  {
-    title: 'Components',
-    icon: <Icon icon={roundGrain} {...ICON_SIZE} />,
-    path: PATH_PAGE.components
   },
   {
     title: 'Pages',

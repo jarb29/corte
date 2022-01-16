@@ -20,7 +20,7 @@ export const PATH_AUTH = {
 };
 
 export const PATH_PAGE = {
-  components: '/components'
+  components: '/dashboard/components'
 };
 
 export const PATH_DASHBOARD = {
@@ -69,7 +69,8 @@ export const PATH_DASHBOARD = {
     post: path(ROOTS_DASHBOARD, '/blog/post/:title'),
     postById: path(ROOTS_DASHBOARD, '/blog/post/apply-these-7-secret-techniques-to-improve-event'),
     newPost: path(ROOTS_DASHBOARD, '/blog/new-post')
+  },
+  components: {
+    components: path(ROOTS_DASHBOARD, '/components')
   }
 };
-
-export const PATH_DOCS = 'https://docs-minimals.vercel.app/introduction';

@@ -26,6 +26,16 @@ const ICONS = {
 };
 
 const sidebarConfig = [
+  {
+    subheader: 'Components',
+    items: [
+      {
+        title: 'Components',
+        path: PATH_DASHBOARD.components.components,
+        icon: ICONS.analytics
+      }
+    ]
+  },
   // GENERAL
   // ----------------------------------------------------------------------
   {
@@ -42,7 +52,6 @@ const sidebarConfig = [
       { title: 'booking', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking }
     ]
   },
-
   // MANAGEMENT
   // ----------------------------------------------------------------------
   {

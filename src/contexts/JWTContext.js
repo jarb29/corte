@@ -75,7 +75,6 @@ function AuthProvider({ children }) {
           const response = await axios.get('/api/account/my-account');
           const { user } = response.data;
 
-          console.log(user);
           dispatch({
             type: 'INITIALIZE',
             payload: {

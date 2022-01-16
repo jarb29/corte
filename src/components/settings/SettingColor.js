@@ -16,8 +16,6 @@ export default function SettingColor() {
           const colorValue = color.value;
           const isSelected = themeColor === colorName;
 
-          console.log(colorOption, 'the color');
-
           return (
             <Grid item xs={4} key={colorName}>
               <Paper
