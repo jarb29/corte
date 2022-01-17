@@ -49,7 +49,8 @@ const sidebarConfig = [
       { title: 'e-commerce', path: PATH_DASHBOARD.general.ecommerce, icon: ICONS.ecommerce },
       { title: 'analytics', path: PATH_DASHBOARD.general.analytics, icon: ICONS.analytics },
       { title: 'banking', path: PATH_DASHBOARD.general.banking, icon: ICONS.banking },
-      { title: 'booking', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking }
+      { title: 'booking', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
+      { title: 'uploadS3', path: PATH_DASHBOARD.general.uploadS3, icon: ICONS.booking }
     ]
   },
   // MANAGEMENT

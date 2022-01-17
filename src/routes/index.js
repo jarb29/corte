@@ -81,6 +81,7 @@ export default function Router() {
         { path: 'banking', element: <GeneralBanking /> },
         { path: 'booking', element: <GeneralBooking /> },
         { path: 'components', element: <ComponentsOverview /> },
+        { path: 'uploadS3', element: <UploadFileS3 /> },
 
         {
           path: 'e-commerce',
@@ -213,7 +214,8 @@ export default function Router() {
   ]);
 }
 
-// IMPORT COMPONENTS
+// Amesti
+const UploadFileS3 = Loadable(lazy(() => import('../pages/amesti/UploadFileS3')));
 
 // Authentication
 const Login = Loadable(lazy(() => import('../pages/authentication/Login')));
