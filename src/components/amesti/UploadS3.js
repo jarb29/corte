@@ -17,28 +17,6 @@ const RootStyle = styled(Page)(({ theme }) => ({
 export default function UploadS3() {
   const [preview, setPreview] = useState(false);
   const [files, setFiles] = useState([]);
-  const [file, setFile] = useState(null);
-  const [avatarUrl, setAvatarUrl] = useState('');
-
-  const handleDropSingleFile = useCallback((acceptedFiles) => {
-    const file = acceptedFiles[0];
-    if (file) {
-      setFile({
-        ...file,
-        preview: URL.createObjectURL(file)
-      });
-    }
-  }, []);
-
-  const handleDropAvatar = useCallback((acceptedFiles) => {
-    const file = acceptedFiles[0];
-    if (file) {
-      setAvatarUrl({
-        ...file,
-        preview: URL.createObjectURL(file)
-      });
-    }
-  }, []);
 
   const handleDropMultiFile = useCallback(
     (acceptedFiles) => {

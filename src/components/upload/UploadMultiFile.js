@@ -21,6 +21,8 @@ import {
 } from '@mui/material';
 // utils
 import { fData } from '../../utils/formatNumber';
+
+import { getUploadUrl, uploadFile } from '../../api/todos-api';
 //
 import { MIconButton } from '../@material-extend';
 import { varFadeInRight } from '../animate';
@@ -56,6 +58,19 @@ UploadMultiFile.propTypes = {
 
 export default function UploadMultiFile({ error, showPreview = false, files, onRemove, onRemoveAll, sx, ...other }) {
   const hasFile = files.length > 0;
+
+  const handleSubmit = async (event) => {
+    try {
+      console.log(files, 'inside the inside');
+      console.log(event.timeStamp, 'Alexxxxx');
+      const uploadUrl = await getUploadUrl(event.todoId);
+      await uploadFile(uploadUrl, files);
+
+      console.log('Raiza');
+    } catch (e) {
+      alert(`Could not upload a file: ${e.message}`);
+    }
+  };
 
   const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
     ...other
@@ -212,7 +227,9 @@ export default function UploadMultiFile({ error, showPreview = false, files, onR
           <Button onClick={onRemoveAll} sx={{ mr: 1.5 }}>
             Remove all
           </Button>
-          <Button variant="contained">Upload files</Button>
+          <Button variant="contained" onClick={handleSubmit}>
+            Upload files
+          </Button>
         </Stack>
       )}
     </Box>
