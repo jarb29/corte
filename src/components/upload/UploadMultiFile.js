@@ -1,4 +1,5 @@
 import { isString } from 'lodash';
+import * as uuid from 'uuid';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import { useDropzone } from 'react-dropzone';
@@ -22,7 +23,7 @@ import {
 // utils
 import { fData } from '../../utils/formatNumber';
 
-import { getUploadUrl, uploadFile } from '../../api/todos-api';
+import { getUploadUrl, uploadFile } from '../../redux/slices/todos-api';
 //
 import { MIconButton } from '../@material-extend';
 import { varFadeInRight } from '../animate';
@@ -59,18 +60,37 @@ UploadMultiFile.propTypes = {
 export default function UploadMultiFile({ error, showPreview = false, files, onRemove, onRemoveAll, sx, ...other }) {
   const hasFile = files.length > 0;
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (file) => {
+    const attachId = uuid.v4();
     try {
-      console.log(files, 'inside the inside');
-      console.log(event.timeStamp, 'Alexxxxx');
-      const uploadUrl = await getUploadUrl(event.todoId);
-      await uploadFile(uploadUrl, files);
+      console.log(file, 'inside the inside');
+      const uploadUrl = await getUploadUrl(attachId);
+
+      console.log(uploadUrl, 'inside the inside');
+      await uploadFile(uploadUrl, file);
 
       console.log('Raiza');
     } catch (e) {
       alert(`Could not upload a file: ${e.message}`);
     }
   };
+
+  console.log(files);
+
+  // const handleSubmit = async (a) => {
+  //   const asyncRes = await a.map((file) => {
+  //     try {
+  //       const attachId = uuid.v4();
+  //       const uploadUrl = getUploadUrl(attachId);
+  //       console.log(uploadUrl, 'inside the inside');
+  //       uploadFile(uploadUrl, file);
+  //     } catch (error) {
+  //       console.log('I caught error here : ', error); // <-- not printed
+  //       alert(`Could not upload a file: ${error}`);
+  //     }
+  //     return file;
+  //   });
+  // };
 
   const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
     ...other
@@ -227,7 +247,7 @@ export default function UploadMultiFile({ error, showPreview = false, files, onR
           <Button onClick={onRemoveAll} sx={{ mr: 1.5 }}>
             Remove all
           </Button>
-          <Button variant="contained" onClick={handleSubmit}>
+          <Button variant="contained" onClick={() => handleSubmit(files)}>
             Upload files
           </Button>
         </Stack>

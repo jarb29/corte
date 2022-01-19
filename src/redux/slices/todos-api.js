@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { apiEndpoint } from '../config';
+import { apiEndpoint } from '../../config';
 
 // export async function getTodos(idToken: string): Promise<Todo[]> {
 //   console.log('Fetching todos')
@@ -59,15 +59,34 @@ export async function getUploadUrl(
   //   idToken,
   todoId
 ) {
+  console.log('ccccccc');
   const response = await Axios.post(`${apiEndpoint}/todos/${todoId}/attachment`, '', {
-    headers: {
-      'Content-Type': 'application/json'
-      //   'Authorization': `Bearer ${idToken}`
-    }
+    // headers: {
+    //   'Content-Type': 'application/json',
+    //   'Access-Control-Allow-Origin': '*'
+    //   //   'Authorization': `Bearer ${idToken}`
+    // }
   });
   return response.data.uploadUrl;
 }
 
 export async function uploadFile(uploadUrl, file) {
-  await Axios.put(uploadUrl, file);
+  console.log(uploadUrl, file, 'inside put file');
+  // await Axios.put(uploadUrl, file);
+
+  await Axios.put(uploadUrl, file, {
+    headers: {
+      'Content-Type': 'application/pdf'
+    }
+  });
 }
+
+// export async function uploadFile(uploadUrl, file) {
+//   console.log(uploadUrl, file, 'inside put file');
+//   // await Axios.put(uploadUrl, file);
+
+//   await fetch(uploadUrl, {
+//     method: 'PUT',
+//     body: file
+//   });
+// }
