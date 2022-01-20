@@ -1,6 +1,8 @@
 import Axios from 'axios';
 import { apiEndpoint } from '../../config';
 
+const pdf2base64 = require('pdf-to-base64');
+
 // export async function getTodos(idToken: string): Promise<Todo[]> {
 //   console.log('Fetching todos')
 
@@ -61,32 +63,34 @@ export async function getUploadUrl(
 ) {
   console.log('ccccccc');
   const response = await Axios.post(`${apiEndpoint}/todos/${todoId}/attachment`, '', {
-    // headers: {
-    //   'Content-Type': 'application/json',
-    //   'Access-Control-Allow-Origin': '*'
-    //   //   'Authorization': `Bearer ${idToken}`
-    // }
+    headers: {
+      // 'Content-Type': 'application/json',
+      // 'Access-Control-Allow-Origin': '*'
+      //   'Authorization': `Bearer ${idToken}`
+    }
   });
   return response.data.uploadUrl;
 }
 
 export async function uploadFile(uploadUrl, file) {
-  console.log(uploadUrl, file, 'inside put file');
-  // await Axios.put(uploadUrl, file);
-
-  await Axios.put(uploadUrl, file, {
+  const result = await Axios.put(uploadUrl, file, {
     headers: {
       'Content-Type': 'application/pdf'
     }
   });
+  console.log('Result: ', result);
 }
 
 // export async function uploadFile(uploadUrl, file) {
-//   console.log(uploadUrl, file, 'inside put file');
+//   console.log(uploadUrl, 'inside put file');
+//   console.log(file, 'inside put file');
 //   // await Axios.put(uploadUrl, file);
+//   const blobData = new Blob([new Uint8Array(file)], { type: 'application/pdf' });
 
-//   await fetch(uploadUrl, {
-//     method: 'PUT',
-//     body: file
+//   const result = await fetch(uploadUrl, {
+//     method: 'POST',
+//     body: blobData
 //   });
+
+//   console.log('Result: ', result);
 // }

@@ -60,37 +60,30 @@ UploadMultiFile.propTypes = {
 export default function UploadMultiFile({ error, showPreview = false, files, onRemove, onRemoveAll, sx, ...other }) {
   const hasFile = files.length > 0;
 
-  const handleSubmit = async (file) => {
-    const attachId = uuid.v4();
-    try {
-      console.log(file, 'inside the inside');
-      const uploadUrl = await getUploadUrl(attachId);
+  // const handleSubmit = async (file) => {
+  //   // const attachId = uuid.v4();
+  //   const attachId = file[0].path;
 
-      console.log(uploadUrl, 'inside the inside');
-      await uploadFile(uploadUrl, file);
-
-      console.log('Raiza');
-    } catch (e) {
-      alert(`Could not upload a file: ${e.message}`);
-    }
-  };
-
-  console.log(files);
-
-  // const handleSubmit = async (a) => {
-  //   const asyncRes = await a.map((file) => {
-  //     try {
-  //       const attachId = uuid.v4();
-  //       const uploadUrl = getUploadUrl(attachId);
-  //       console.log(uploadUrl, 'inside the inside');
-  //       uploadFile(uploadUrl, file);
-  //     } catch (error) {
-  //       console.log('I caught error here : ', error); // <-- not printed
-  //       alert(`Could not upload a file: ${error}`);
-  //     }
-  //     return file;
-  //   });
+  //   console.log(attachId, 'the id');
+  //   try {
+  //     const uploadUrl = await getUploadUrl(attachId);
+  //     await uploadFile(uploadUrl, file[0]);
+  //   } catch (e) {
+  //     alert(`Could not upload a file: ${e.message}`);
+  //   }
   // };
+
+  const handleSubmit = async (files) => {
+    files.forEach(async (element) => {
+      try {
+        const attachId = element.path;
+        const uploadUrl = await getUploadUrl(attachId);
+        await uploadFile(uploadUrl, element);
+      } catch (error) {
+        alert(`Could not upload a file: ${error}`);
+      }
+    });
+  };
 
   const { getRootProps, getInputProps, isDragActive, isDragReject, fileRejections } = useDropzone({
     ...other
