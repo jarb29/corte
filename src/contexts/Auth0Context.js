@@ -14,8 +14,6 @@ const initialState = {
   user: null
 };
 
-console.log(initialState);
-
 const handlers = {
   INITIALIZE: (state, action) => {
     const { isAuthenticated, user } = action.payload;
@@ -84,7 +82,7 @@ function AuthProvider({ children }) {
     };
 
     initialize();
-  }, []);
+  }, [dispatch]);
 
   const login = async () => {
     await auth0Client.loginWithPopup();
@@ -112,7 +110,7 @@ function AuthProvider({ children }) {
           id: state?.user?.sub,
           photoURL: state?.user?.picture,
           email: state?.user?.email,
-          displayName: 'Jaydon Frankie',
+          displayName: state?.user?.name,
           role: 'admin'
         },
         login,

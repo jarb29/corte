@@ -183,7 +183,7 @@ export default function MenuMobile({ isOffset, isHome, navConfig }) {
         PaperProps={{ sx: { pb: 5, width: 260 } }}
       >
         <Scrollbar>
-          <Link component={RouterLink} to="/" sx={{ display: 'inline-flex' }}>
+          <Link component={RouterLink} to="/dashboard" sx={{ display: 'inline-flex' }}>
             <Logo sx={{ mx: PADDING, my: 3 }} />
           </Link>
 

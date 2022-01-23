@@ -1,8 +1,6 @@
 import Axios from 'axios';
 import { apiEndpoint } from '../../config';
 
-const pdf2base64 = require('pdf-to-base64');
-
 // export async function getTodos(idToken: string): Promise<Todo[]> {
 //   console.log('Fetching todos')
 
@@ -61,11 +59,9 @@ export async function getUploadUrl(
   //   idToken,
   todoId
 ) {
-  console.log('ccccccc');
   const response = await Axios.post(`${apiEndpoint}/todos/${todoId}/attachment`, '', {
     headers: {
-      // 'Content-Type': 'application/json',
-      // 'Access-Control-Allow-Origin': '*'
+      'Content-Type': 'application/json'
       //   'Authorization': `Bearer ${idToken}`
     }
   });

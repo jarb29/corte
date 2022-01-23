@@ -33,7 +33,8 @@ export default function App() {
               <Settings />
               <ScrollToTop />
               <GoogleAnalytics />
-              {isInitialized ? <Router /> : <LoadingScreen />}
+              {/* {isInitialized ? <Router /> : <LoadingScreen />} */}
+              <Router />
             </NotistackProvider>
           </RtlLayout>
         </ThemeLocalization>

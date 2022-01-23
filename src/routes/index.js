@@ -195,21 +195,6 @@ export default function Router() {
         }
       ]
     },
-
-    // Main Routes
-
-    {
-      path: '/dashboard',
-      children: [
-        {
-          element: (
-            <AuthGuard>
-              <Login />
-            </AuthGuard>
-          )
-        }
-      ]
-    },
     { path: '*', element: <Navigate to="/dashboard" replace /> }
   ]);
 }

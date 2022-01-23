@@ -67,7 +67,7 @@ export default function MainNavbar() {
             justifyContent: 'space-between'
           }}
         >
-          <RouterLink to="/">
+          <RouterLink to="/dashboard">
             <Logo />
           </RouterLink>
           <Box sx={{ flexGrow: 1 }} />
