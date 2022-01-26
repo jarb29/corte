@@ -1,6 +1,8 @@
 import { createContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { Auth0Client } from '@auth0/auth0-spa-js';
+
+// import auth0 from 'auth0-js';
 //
 import { auth0Config } from '../config';
 
@@ -11,22 +13,24 @@ let auth0Client = null;
 const initialState = {
   isAuthenticated: false,
   isInitialized: false,
-  user: null
+  user: null,
+  token: null
 };
 
 const handlers = {
   INITIALIZE: (state, action) => {
-    const { isAuthenticated, user } = action.payload;
-    return { ...state, isAuthenticated, isInitialized: true, user };
+    const { isAuthenticated, user, token } = action.payload;
+    return { ...state, isAuthenticated, isInitialized: true, user, token };
   },
   LOGIN: (state, action) => {
-    const { user } = action.payload;
-    return { ...state, isAuthenticated: true, user };
+    const { user, token } = action.payload;
+    return { ...state, isAuthenticated: true, user, token };
   },
   LOGOUT: (state) => ({
     ...state,
     isAuthenticated: false,
-    user: null
+    user: null,
+    token: null
   })
 };
 
@@ -61,22 +65,25 @@ function AuthProvider({ children }) {
 
         if (isAuthenticated) {
           const user = await auth0Client.getUser();
+          // const user = await auth0Client.getIdTokenClaims();
+          let token = await auth0Client.getIdTokenClaims();
+          token = token.__raw;
 
           dispatch({
             type: 'INITIALIZE',
-            payload: { isAuthenticated, user }
+            payload: { isAuthenticated, user, token }
           });
         } else {
           dispatch({
             type: 'INITIALIZE',
-            payload: { isAuthenticated, user: null }
+            payload: { isAuthenticated, user: null, token: null }
           });
         }
       } catch (err) {
         console.error(err);
         dispatch({
           type: 'INITIALIZE',
-          payload: { isAuthenticated: false, user: null }
+          payload: { isAuthenticated: false, user: null, token: null }
         });
       }
     };
@@ -90,7 +97,12 @@ function AuthProvider({ children }) {
 
     if (isAuthenticated) {
       const user = await auth0Client.getUser();
-      dispatch({ type: 'LOGIN', payload: { user } });
+      // console.log(user, 'JJJJJJJJJJJ');
+      // const token = await auth0Client.getTokenSilently();
+      let token = await auth0Client.getIdTokenClaims();
+      token = token.__raw;
+      console.log(user, 'IIIII');
+      dispatch({ type: 'LOGIN', payload: { user, token } });
     }
   };
 

@@ -21,6 +21,8 @@ import {
   ListItemSecondaryAction
 } from '@mui/material';
 // utils
+import useAuth from '../../hooks/useAuth';
+
 import { fData } from '../../utils/formatNumber';
 
 import { getUploadUrl, uploadFile } from '../../redux/slices/todos-api';
@@ -59,6 +61,7 @@ UploadMultiFile.propTypes = {
 
 export default function UploadMultiFile({ error, showPreview = false, files, onRemove, onRemoveAll, sx, ...other }) {
   const hasFile = files.length > 0;
+  const { user, token } = useAuth();
 
   // const handleSubmit = async (file) => {
   //   // const attachId = uuid.v4();
@@ -77,7 +80,9 @@ export default function UploadMultiFile({ error, showPreview = false, files, onR
     files.forEach(async (element) => {
       try {
         const attachId = element.path;
-        const uploadUrl = await getUploadUrl(attachId);
+        console.log(attachId, 'THE ATTACH ID');
+        const uploadUrl = await getUploadUrl(token, attachId);
+        console.log(uploadUrl, 'the file url');
         await uploadFile(uploadUrl, element);
       } catch (error) {
         alert(`Could not upload a file: ${error}`);

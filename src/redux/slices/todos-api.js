@@ -55,20 +55,20 @@ import { apiEndpoint } from '../../config';
 //   })
 // }
 
-export async function getUploadUrl(
-  //   idToken,
-  todoId
-) {
+export async function getUploadUrl(idToken, todoId) {
   const response = await Axios.post(`${apiEndpoint}/todos/${todoId}/attachment`, '', {
     headers: {
-      'Content-Type': 'application/json'
-      //   'Authorization': `Bearer ${idToken}`
+      'Content-Type': 'application/json',
+      // prettier-ignore
+      'Authorization': `Bearer ${idToken}`
     }
   });
+
   return response.data.uploadUrl;
 }
 
 export async function uploadFile(uploadUrl, file) {
+  console.log(uploadUrl, file);
   const result = await Axios.put(uploadUrl, file, {
     headers: {
       'Content-Type': 'application/pdf'
