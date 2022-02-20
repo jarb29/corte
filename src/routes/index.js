@@ -81,7 +81,20 @@ export default function Router() {
         { path: 'banking', element: <GeneralBanking /> },
         { path: 'booking', element: <GeneralBooking /> },
         { path: 'components', element: <ComponentsOverview /> },
-        { path: 'uploadS3', element: <UploadFileS3 /> },
+        {
+          path: 'amesti',
+          children: [
+            { element: <Navigate to="/dashboard/amesti/uploadS3" replace /> },
+            { path: 'uploadS3', element: <UploadFileS3 /> },
+            { path: 'tableNestS3', element: <TableNestS3 /> }
+            // { path: 'product/:name', element: <EcommerceProductDetails /> },
+            // { path: 'list', element: <EcommerceProductList /> },
+            // { path: 'product/new', element: <EcommerceProductCreate /> },
+            // { path: 'product/:name/edit', element: <EcommerceProductCreate /> },
+            // { path: 'checkout', element: <EcommerceCheckout /> },
+            // { path: 'invoice', element: <EcommerceInvoice /> }
+          ]
+        },
 
         {
           path: 'e-commerce',
@@ -201,6 +214,7 @@ export default function Router() {
 
 // Amesti
 const UploadFileS3 = Loadable(lazy(() => import('../pages/amesti/UploadFileS3')));
+const TableNestS3 = Loadable(lazy(() => import('../pages/amesti/TableNestS3')));
 
 // Authentication
 const Login = Loadable(lazy(() => import('../pages/authentication/Login')));

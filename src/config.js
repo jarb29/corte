@@ -24,7 +24,7 @@ export const mapConfig = process.env.REACT_APP_MAP_MAPBOX;
 export const googleAnalyticsConfig = process.env.REACT_APP_GA_MEASUREMENT_ID;
 
 /// AWS
-const apiId = 'pqvta0rish';
+const apiId = 'vyt9orx4b5';
 export const apiEndpoint = `https://${apiId}.execute-api.us-east-1.amazonaws.com/dev`;
 
 // export const authConfig = {

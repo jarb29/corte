@@ -49,10 +49,31 @@ const sidebarConfig = [
       { title: 'e-commerce', path: PATH_DASHBOARD.general.ecommerce, icon: ICONS.ecommerce },
       { title: 'analytics', path: PATH_DASHBOARD.general.analytics, icon: ICONS.analytics },
       { title: 'banking', path: PATH_DASHBOARD.general.banking, icon: ICONS.banking },
-      { title: 'booking', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking },
-      { title: 'uploadS3', path: PATH_DASHBOARD.general.uploadS3, icon: ICONS.booking }
+      { title: 'booking', path: PATH_DASHBOARD.general.booking, icon: ICONS.booking }
     ]
   },
+  // AMESTI
+  // ----------------------------------------------------------------------
+  {
+    subheader: 'amesti',
+    items: [
+      // AMESTI : TIEMPOS
+      {
+        title: 'Corte',
+        path: PATH_DASHBOARD.amesti.root,
+        icon: ICONS.user,
+        children: [
+          { title: 'cargar archivo nest', path: PATH_DASHBOARD.amesti.uploadS3 },
+          { title: 'seleccion de pieza critica', path: PATH_DASHBOARD.amesti.tableNestS3 },
+          { title: 'list', path: PATH_DASHBOARD.user.list },
+          { title: 'create', path: PATH_DASHBOARD.user.newUser },
+          { title: 'edit', path: PATH_DASHBOARD.user.editById },
+          { title: 'account', path: PATH_DASHBOARD.user.account }
+        ]
+      }
+    ]
+  },
+
   // MANAGEMENT
   // ----------------------------------------------------------------------
   {

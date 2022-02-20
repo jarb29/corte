@@ -3,7 +3,9 @@ import { styled } from '@mui/material/styles';
 import { Box, Grid, Container } from '@mui/material';
 // components
 
-import { Block } from './Block';
+import { PATH_PAGE } from '../../routes/paths';
+// components
+import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
 
 // import { Box, Grid, Checkbox, Container, TextField, Typography, Autocomplete } from '@mui/material';
 import Page from '../../components/Page';
@@ -24,6 +26,21 @@ const RootStyle = styled(Page)(({ theme }) => ({
 export default function UploadFileS3() {
   return (
     <RootStyle title="Upload File S3">
+      <Box
+        sx={{
+          pt: 6,
+          pb: 1,
+          mb: 10,
+          bgcolor: (theme) => (theme.palette.mode === 'light' ? 'grey.200' : 'grey.800')
+        }}
+      >
+        <Container maxWidth="lg">
+          <HeaderBreadcrumbs
+            heading="Cargue los archivos que desea analizar"
+            links={[{ name: 'Components', href: PATH_PAGE.components }, { name: 'DataGrid' }]}
+          />
+        </Container>
+      </Box>
       <Container maxWidth="lg">
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
