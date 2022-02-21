@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
 import arrowIosUpwardFill from '@iconify/icons-eva/arrow-ios-upward-fill';
@@ -23,26 +22,12 @@ import {
 // ----------------------------------------------------------------------
 import DataGridBasic from '../../data-grid/DataGridBasic';
 
-CollapsibleTable.propTypes = {
-  row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    history: PropTypes.arrayOf(
-      PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        customerId: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired
-      })
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired
-  }).isRequired
-};
-
 export default function CollapsibleTable({ row }) {
   const [open, setOpen] = useState(false);
+
+  const data = JSON.parse(row[0]);
+
+  console.log(data.FOLDER[0]);
 
   return (
     <>
@@ -53,12 +38,8 @@ export default function CollapsibleTable({ row }) {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.name}
+          {data.FOLDER[0]}
         </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -70,7 +51,7 @@ export default function CollapsibleTable({ row }) {
                     <Card>
                       <CardHeader title="Basic" sx={{ mb: 2 }} />
                       <Box sx={{ height: 390 }}>
-                        <DataGridBasic />
+                        <DataGridBasic data={data} />
                       </Box>
                     </Card>
                   </Stack>

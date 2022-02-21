@@ -82,7 +82,7 @@ export default function UploadMultiFile({ error, showPreview = false, files, onR
         const attachId = element.path;
         console.log(attachId, 'THE ATTACH ID');
         const uploadUrl = await getUploadUrl(token, attachId);
-        console.log(uploadUrl, 'the file url');
+        console.log(uploadUrl, 'the file URL');
         await uploadFile(uploadUrl, element);
       } catch (error) {
         alert(`Could not upload a file: ${error}`);

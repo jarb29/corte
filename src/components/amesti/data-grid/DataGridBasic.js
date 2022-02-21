@@ -12,49 +12,48 @@ import { MIconButton } from '../../@material-extend';
 
 const columns = [
   {
-    field: 'id',
-    headerName: 'ID',
-    width: 120
+    field: 'NOMBRE PIEZA',
+    headerName: 'PIEZA',
+    width: 160
   },
   {
-    field: 'firstName',
-    headerName: 'First name',
-    width: 160,
-    editable: true
+    field: 'CANTIDAD',
+    headerName: 'CANTIDAD',
+    width: 160
   },
   {
-    field: 'lastName',
-    headerName: 'Last name',
-    width: 160,
-    editable: true
+    field: 'PROGRAMA:',
+    headerName: 'PROGRAMA:',
+    width: 160
   },
   {
-    field: 'age',
-    headerName: 'Age',
+    field: 'TIEMPO MECANIZADO',
+    headerName: 'TIEMPO',
     type: 'number',
-    width: 120,
-    editable: true,
+    width: 160,
     align: 'center',
     headerAlign: 'center'
   },
   {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    flex: 1,
-    valueGetter: (params) =>
-      `${params.getValue(params.id, 'firstName') || ''} ${params.getValue(params.id, 'lastName') || ''}`
+    field: 'LONGITUD DE CORTE',
+    headerName: 'LONGITUD',
+    width: 160
+  },
+  {
+    field: 'DESPERDICIO',
+    headerName: 'DESPERDICIO',
+    width: 160
   },
   {
     field: 'action',
     headerName: ' ',
-    width: 80,
+    width: 160,
     align: 'right',
     sortable: false,
     disableColumnMenu: true,
     renderCell: () => (
       <MIconButton>
-        <Box component={Icon} icon={moreVerticalFill} sx={{ width: 20, height: 20 }} />
+        <Box component={Icon} icon={moreVerticalFill} sx={{ width: 10, height: 10 }} />
       </MIconButton>
     )
   }
@@ -67,6 +66,15 @@ const rows = [...Array(30)].map((_, index) => ({
   age: mockData.number.age(index)
 }));
 
-export default function DataGridBasic() {
+export default function DataGridBasic(row) {
+  const column = Object.keys(row.data);
+  // console.log(row.data.CANTIDAD[0]);
+  const rows = Object.keys(row.data).map(function (key, index) {
+    pieza: row[key][index];
+    // lastName: mockData.name.lastName(index),
+    // firstName: mockData.name.firstName(index),
+    // age: mockData.number.age(index)
+  });
+  console.log(rows, 'inside de component');
   return <DataGrid columns={columns} rows={rows} checkboxSelection disableSelectionOnClick />;
 }

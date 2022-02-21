@@ -1,8 +1,15 @@
+import { useState, useEffect } from 'react';
+
 // material
+
 import { styled } from '@mui/material/styles';
 import { Box, Card, Container, CardHeader, Stack } from '@mui/material';
+import { getTodosFiles } from '../../redux/slices/todos-api';
 // routes
+import useAuth from '../../hooks/useAuth';
 import { PATH_PAGE } from '../../routes/paths';
+
+import LoadingScreen from '../../components/LoadingScreen';
 // components
 import Page from '../../components/Page';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
@@ -17,6 +24,23 @@ const RootStyle = styled(Page)(({ theme }) => ({
 }));
 
 export default function TableNestS3() {
+  const { user, token } = useAuth();
+  const [files, setFiles] = useState([]);
+
+  useEffect(() => {
+    // declare the async data fetching function
+    const fetchData = async () => {
+      // get the data from the api
+      const data = await getTodosFiles(token);
+      // set state with the result
+      setFiles(data);
+    };
+    // call the function
+    fetchData()
+      // make sure to catch any error
+      .catch(console.error);
+  }, []);
+
   return (
     <RootStyle title="Components: Table | Minimal-UI">
       <Box
@@ -34,14 +58,20 @@ export default function TableNestS3() {
           />
         </Container>
       </Box>
-      <Container maxWidth="lg">
-        <Stack spacing={5}>
-          <Card>
-            <CardHeader title="Programas Nest" />
-            <CollapsibleTable />
-          </Card>
-        </Stack>
-      </Container>
+      {files.length < 0 ? (
+        <LoadingScreen size={32} color="info" />
+      ) : (
+        <Container maxWidth="lg">
+          <Stack spacing={5}>
+            <Card>
+              <CardHeader title="Programas Nest" />
+              {files.map((file, id) => (
+                <CollapsibleTable key={id} files={file} />
+              ))}
+            </Card>
+          </Stack>
+        </Container>
+      )}
     </RootStyle>
   );
 }

@@ -2,8 +2,6 @@
 import { Table, TableRow, TableHead, TableBody, TableCell, TableContainer } from '@mui/material';
 // components
 import Scrollbar from '../../../Scrollbar';
-
-import DataGridBasic from '../../data-grid/DataGridBasic';
 //
 import CollapsibleTableRow from './CollapsibleTableRow';
 
@@ -40,26 +38,14 @@ const COLLAPSIBLE_TABLE = [
   createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5)
 ];
 
-export default function CollapsibleTable() {
+export default function CollapsibleTable(file) {
+  const data = [file.files.DATA];
   return (
     <Scrollbar>
       <TableContainer sx={{ minWidth: 800, mt: 3 }}>
         <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell />
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell align="right">Calories</TableCell>
-              <TableCell align="right">Fat&nbsp;(g)</TableCell>
-              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-              <TableCell align="right">Protein&nbsp;(g)</TableCell>
-            </TableRow>
-          </TableHead>
           <TableBody>
-            {COLLAPSIBLE_TABLE.map((row) => (
-              // <DataGridBasic />
-              <CollapsibleTableRow key={row.name} row={row} />
-            ))}
+            <CollapsibleTableRow key={file.files.NOMBRE_PROGRAMA} row={data} />
           </TableBody>
         </Table>
       </TableContainer>
