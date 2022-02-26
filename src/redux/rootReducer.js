@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 // slices
+import amestiReducer from './slices/amesti';
 import mailReducer from './slices/mail';
 import chatReducer from './slices/chat';
 import blogReducer from './slices/blog';
@@ -27,6 +28,7 @@ const productPersistConfig = {
 };
 
 const rootReducer = combineReducers({
+  amesti: amestiReducer,
   mail: mailReducer,
   chat: chatReducer,
   blog: blogReducer,

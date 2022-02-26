@@ -1,12 +1,16 @@
+/* eslint-disable no-plusplus */
+import { useState } from 'react';
 import { Icon } from '@iconify/react';
 import moreVerticalFill from '@iconify/icons-eva/more-vertical-fill';
 // material
 import { DataGrid } from '@mui/x-data-grid';
 import { Box } from '@mui/material';
 // utils
-import mockData from '../../../utils/mock-data';
+import { useDispatch } from '../../../redux/store';
+import { startLoading } from '../../../redux/slices/amesti';
 // components
 import { MIconButton } from '../../@material-extend';
+import FormDialogsTablaNest from '../FormDialogsTablaNest';
 
 // ----------------------------------------------------------------------
 
@@ -14,35 +18,66 @@ const columns = [
   {
     field: 'NOMBRE PIEZA',
     headerName: 'PIEZA',
-    width: 160
+    width: 200,
+    align: 'center',
+    headerAlign: 'center'
   },
   {
     field: 'CANTIDAD',
     headerName: 'CANTIDAD',
-    width: 160
+    width: 200,
+    align: 'center',
+    headerAlign: 'center'
   },
   {
-    field: 'PROGRAMA:',
+    field: 'NOMBRE PROGRAMA:',
     headerName: 'PROGRAMA:',
-    width: 160
-  },
-  {
-    field: 'TIEMPO MECANIZADO',
-    headerName: 'TIEMPO',
-    type: 'number',
     width: 160,
     align: 'center',
     headerAlign: 'center'
   },
   {
-    field: 'LONGITUD DE CORTE',
-    headerName: 'LONGITUD',
-    width: 160
+    field: 'TIEMPO MECANIZADO NEST (min)',
+    headerName: 'TIEMPO',
+    type: 'number',
+    width: 200,
+    align: 'center',
+    headerAlign: 'center'
   },
   {
-    field: 'DESPERDICIO',
+    field: 'LONGITUD DE CORTE TOTAL (mm)',
+    headerName: 'LONGITUD',
+    width: 160,
+    align: 'center',
+    headerAlign: 'center'
+  },
+  {
+    field: 'DESPERDICIO (%)',
     headerName: 'DESPERDICIO',
-    width: 160
+    width: 200,
+    align: 'center',
+    headerAlign: 'center'
+  },
+  {
+    field: 'MODELO',
+    headerName: 'MODELO',
+    width: 200,
+    align: 'center',
+    headerAlign: 'center'
+  },
+  {
+    field: 'FOLDER',
+    headerName: 'FOLDER',
+    width: 260,
+    align: 'center',
+    headerAlign: 'center'
+  },
+  {
+    field: 'ESPESOR (mm)',
+    headerName: 'ESPESOR',
+    width: 160,
+    align: 'center',
+    headerAlign: 'center'
   },
   {
     field: 'action',
@@ -53,28 +88,38 @@ const columns = [
     disableColumnMenu: true,
     renderCell: () => (
       <MIconButton>
+        <FormDialogsTablaNest />
         <Box component={Icon} icon={moreVerticalFill} sx={{ width: 10, height: 10 }} />
       </MIconButton>
     )
   }
 ];
 
-const rows = [...Array(30)].map((_, index) => ({
-  id: mockData.id(index),
-  lastName: mockData.name.lastName(index),
-  firstName: mockData.name.firstName(index),
-  age: mockData.number.age(index)
-}));
+export default function DataGridBasic(ro) {
+  const [selectionModel, setSelectionModel] = useState([]);
+  const dispatch = useDispatch();
+  const key = Object.keys(ro.data);
+  const a = [];
+  for (let i = 0; i < Object.keys(ro.data.CANTIDAD).length; i++) {
+    const obj = {};
+    for (let a = 0; a < key.length; a++) {
+      obj[key[a]] = Object.values(ro.data[key[a]])[i];
+    }
+    obj.id = i;
+    a.push(obj);
+  }
 
-export default function DataGridBasic(row) {
-  const column = Object.keys(row.data);
-  // console.log(row.data.CANTIDAD[0]);
-  const rows = Object.keys(row.data).map(function (key, index) {
-    pieza: row[key][index];
-    // lastName: mockData.name.lastName(index),
-    // firstName: mockData.name.firstName(index),
-    // age: mockData.number.age(index)
-  });
-  console.log(rows, 'inside de component');
-  return <DataGrid columns={columns} rows={rows} checkboxSelection disableSelectionOnClick />;
+  return (
+    <DataGrid
+      columns={columns}
+      rows={a}
+      checkboxSelection
+      disableSelectionOnClick
+      onSelectionModelChange={(newSelectionModel) => {
+        setSelectionModel(newSelectionModel);
+        dispatch(startLoading(a[newSelectionModel]));
+      }}
+      selectionModel={selectionModel}
+    />
+  );
 }

@@ -65,6 +65,7 @@ const sidebarConfig = [
         children: [
           { title: 'cargar archivo nest', path: PATH_DASHBOARD.amesti.uploadS3 },
           { title: 'seleccion de pieza critica', path: PATH_DASHBOARD.amesti.tableNestS3 },
+          { title: 'seleccion de nest/tiempo', path: PATH_DASHBOARD.amesti.TableSelectedNest },
           { title: 'list', path: PATH_DASHBOARD.user.list },
           { title: 'create', path: PATH_DASHBOARD.user.newUser },
           { title: 'edit', path: PATH_DASHBOARD.user.editById },

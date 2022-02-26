@@ -27,8 +27,6 @@ export default function CollapsibleTable({ row }) {
 
   const data = JSON.parse(row[0]);
 
-  console.log(data.FOLDER[0]);
-
   return (
     <>
       <TableRow>

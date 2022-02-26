@@ -55,7 +55,8 @@ export const PATH_DASHBOARD = {
   amesti: {
     root: path(ROOTS_DASHBOARD, '/amesti'),
     uploadS3: path(ROOTS_DASHBOARD, '/amesti/uploadS3'),
-    tableNestS3: path(ROOTS_DASHBOARD, '/amesti/tableNestS3')
+    tableNestS3: path(ROOTS_DASHBOARD, '/amesti/tableNestS3'),
+    TableSelectedNest: path(ROOTS_DASHBOARD, '/amesti/TableSelectedNest')
     // productById: path(ROOTS_DASHBOARD, '/e-commerce/product/nike-air-force-1-ndestrukt'),
     // list: path(ROOTS_DASHBOARD, '/e-commerce/list'),
     // newProduct: path(ROOTS_DASHBOARD, '/e-commerce/product/new'),

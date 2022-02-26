@@ -2,9 +2,24 @@ import Axios from 'axios';
 import { apiEndpoint } from '../../config';
 
 export async function getTodosFiles(idToken) {
-  console.log('Fetching todos');
+  console.log('Fetching todos from todos files');
 
   const response = await Axios.get(`${apiEndpoint}/gettodos`, {
+    headers: {
+      'Content-Type': 'application/json',
+      // prettier-ignore
+      'Authorization': `Bearer ${idToken}`
+    }
+  });
+
+  console.log('Todos:', response);
+  return response.data.items;
+}
+
+export async function getTodosNest(idToken) {
+  console.log('Fetching todos from todosnest');
+
+  const response = await Axios.get(`${apiEndpoint}/getnest`, {
     headers: {
       'Content-Type': 'application/json',
       // prettier-ignore
