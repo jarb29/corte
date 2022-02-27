@@ -59,16 +59,16 @@ export default function Login() {
   return (
     <RootStyle title="Login | Minimal-UI">
       <AuthLayout>
-        Don’t have an account? &nbsp;
+        No tienes una cuenta? &nbsp;
         <Link underline="none" variant="subtitle2" component={RouterLink} to={PATH_AUTH.register}>
-          Get started
+          Comienza aqui
         </Link>
       </AuthLayout>
 
       <MHidden width="mdDown">
         <SectionStyle>
           <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-            Hi, Welcome Back
+            Hi, Alex Welcome Back
           </Typography>
           <img src="/static/illustrations/illustration_login.png" alt="login" />
         </SectionStyle>
@@ -79,9 +79,9 @@ export default function Login() {
           <Stack direction="row" alignItems="center" sx={{ mb: 5 }}>
             <Box sx={{ flexGrow: 1 }}>
               <Typography variant="h4" gutterBottom>
-                Sign in to Minimal
+                Registrate
               </Typography>
-              <Typography sx={{ color: 'text.secondary' }}>Enter your details below.</Typography>
+              <Typography sx={{ color: 'text.secondary' }}>Introduzca sus datos.</Typography>
             </Box>
 
             <Tooltip title={capitalCase(method)}>
@@ -90,24 +90,19 @@ export default function Login() {
           </Stack>
 
           {method === 'firebase' && <AuthFirebaseSocials />}
-
-          <Alert severity="info" sx={{ mb: 3 }}>
-            Use email : <strong>demo@minimals.cc</strong> / password :<strong>&nbsp;demo1234</strong>
-          </Alert>
-
           {method !== 'auth0' ? (
             <LoginForm />
           ) : (
             <Button fullWidth size="large" type="submit" variant="contained" onClick={handleLoginAuth0}>
-              Login
+              Entrar
             </Button>
           )}
 
           <MHidden width="smUp">
             <Typography variant="body2" align="center" sx={{ mt: 3 }}>
-              Don’t have an account?&nbsp;
+              No tienes una cuenta?&nbsp;
               <Link variant="subtitle2" component={RouterLink} to={PATH_AUTH.register}>
-                Get started
+                Comienza aqui
               </Link>
             </Typography>
           </MHidden>

@@ -101,7 +101,6 @@ function AuthProvider({ children }) {
       // const token = await auth0Client.getTokenSilently();
       let token = await auth0Client.getIdTokenClaims();
       token = token.__raw;
-      console.log(user, 'IIIII');
       dispatch({ type: 'LOGIN', payload: { user, token } });
     }
   };

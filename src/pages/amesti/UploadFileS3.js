@@ -42,7 +42,7 @@ export default function UploadFileS3() {
         </Container>
       </Box>
 
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12}>
         <UploadS3 />
       </Grid>
     </RootStyle>

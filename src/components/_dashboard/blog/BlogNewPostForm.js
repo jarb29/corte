@@ -24,7 +24,7 @@ import fakeRequest from '../../../utils/fakeRequest';
 import { QuillEditor } from '../../editor';
 import { UploadSingleFile } from '../../upload';
 //
-import BlogNewPostPreview from './BlogNewPostPreview';
+// import BlogNewPostPreview from './BlogNewPostPreview';
 
 // ----------------------------------------------------------------------
 

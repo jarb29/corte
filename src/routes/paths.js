@@ -32,17 +32,6 @@ export const PATH_DASHBOARD = {
     banking: path(ROOTS_DASHBOARD, '/banking'),
     booking: path(ROOTS_DASHBOARD, '/booking')
   },
-  mail: {
-    root: path(ROOTS_DASHBOARD, '/mail'),
-    all: path(ROOTS_DASHBOARD, '/mail/all')
-  },
-  chat: {
-    root: path(ROOTS_DASHBOARD, '/chat'),
-    new: path(ROOTS_DASHBOARD, '/chat/new'),
-    conversation: path(ROOTS_DASHBOARD, '/chat/:conversationKey')
-  },
-  calendar: path(ROOTS_DASHBOARD, '/calendar'),
-  kanban: path(ROOTS_DASHBOARD, '/kanban'),
   user: {
     root: path(ROOTS_DASHBOARD, '/user'),
     profile: path(ROOTS_DASHBOARD, '/user/profile'),
@@ -58,31 +47,8 @@ export const PATH_DASHBOARD = {
     uploadS3: path(ROOTS_DASHBOARD, '/amesti/uploadS3'),
     tableNestS3: path(ROOTS_DASHBOARD, '/amesti/tableNestS3'),
     TableSelectedNest: path(ROOTS_DASHBOARD, '/amesti/TableSelectedNest'),
-    AnalyticsTimePage: path(ROOTS_DASHBOARD, '/amesti/AnalyticsTimePage')
-    // productById: path(ROOTS_DASHBOARD, '/e-commerce/product/nike-air-force-1-ndestrukt'),
-    // list: path(ROOTS_DASHBOARD, '/e-commerce/list'),
-    // newProduct: path(ROOTS_DASHBOARD, '/e-commerce/product/new'),
-    // editById: path(ROOTS_DASHBOARD, '/e-commerce/product/nike-blazer-low-77-vintage/edit'),
-    // checkout: path(ROOTS_DASHBOARD, '/e-commerce/checkout'),
-    // invoice: path(ROOTS_DASHBOARD, '/e-commerce/invoice')
-  },
-  eCommerce: {
-    root: path(ROOTS_DASHBOARD, '/e-commerce'),
-    shop: path(ROOTS_DASHBOARD, '/e-commerce/shop'),
-    product: path(ROOTS_DASHBOARD, '/e-commerce/product/:name'),
-    productById: path(ROOTS_DASHBOARD, '/e-commerce/product/nike-air-force-1-ndestrukt'),
-    list: path(ROOTS_DASHBOARD, '/e-commerce/list'),
-    newProduct: path(ROOTS_DASHBOARD, '/e-commerce/product/new'),
-    editById: path(ROOTS_DASHBOARD, '/e-commerce/product/nike-blazer-low-77-vintage/edit'),
-    checkout: path(ROOTS_DASHBOARD, '/e-commerce/checkout'),
-    invoice: path(ROOTS_DASHBOARD, '/e-commerce/invoice')
-  },
-  blog: {
-    root: path(ROOTS_DASHBOARD, '/blog'),
-    posts: path(ROOTS_DASHBOARD, '/blog/posts'),
-    post: path(ROOTS_DASHBOARD, '/blog/post/:title'),
-    postById: path(ROOTS_DASHBOARD, '/blog/post/apply-these-7-secret-techniques-to-improve-event'),
-    newPost: path(ROOTS_DASHBOARD, '/blog/new-post')
+    AnalyticsTimePage: path(ROOTS_DASHBOARD, '/amesti/AnalyticsTimePage'),
+    banking: path(ROOTS_DASHBOARD, '/amesti/banking')
   },
   components: {
     components: path(ROOTS_DASHBOARD, '/components')
