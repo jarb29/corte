@@ -87,7 +87,8 @@ export default function Router() {
             { element: <Navigate to="/dashboard/amesti/uploadS3" replace /> },
             { path: 'uploadS3', element: <UploadFileS3 /> },
             { path: 'tableNestS3', element: <TableNestS3 /> },
-            { path: 'TableSelectedNest', element: <TableSelectedNest /> }
+            { path: 'TableSelectedNest', element: <TableSelectedNest /> },
+            { path: 'AnalyticsTimePage', element: <AnalyticsTimePage /> }
             // { path: 'product/:name', element: <EcommerceProductDetails /> },
             // { path: 'list', element: <EcommerceProductList /> },
             // { path: 'product/new', element: <EcommerceProductCreate /> },
@@ -217,7 +218,7 @@ export default function Router() {
 const UploadFileS3 = Loadable(lazy(() => import('../pages/amesti/UploadFileS3')));
 const TableNestS3 = Loadable(lazy(() => import('../pages/amesti/TableNestS3')));
 const TableSelectedNest = Loadable(lazy(() => import('../pages/amesti/TableSelectedNest')));
-
+const AnalyticsTimePage = Loadable(lazy(() => import('../pages/amesti/AnalyticsTimePage')));
 // Authentication
 const Login = Loadable(lazy(() => import('../pages/authentication/Login')));
 const Register = Loadable(lazy(() => import('../pages/authentication/Register')));

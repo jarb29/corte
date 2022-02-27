@@ -17,6 +17,9 @@ export default function FormDialogsTablaNest() {
   const handleClickOpen = () => {
     setOpen(true);
   };
+  const handleCloseII = () => {
+    setOpen(false);
+  };
 
   const handleClose = () => {
     setOpen(false);
@@ -29,7 +32,7 @@ export default function FormDialogsTablaNest() {
         Seleccionar
       </Button>
 
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open} onClose={handleCloseII}>
         <DialogTitle>Seleccionar</DialogTitle>
         <DialogContent>
           <DialogContentText>Introduzca la cantidad de piezas por estufa usadas.</DialogContentText>
@@ -44,7 +47,7 @@ export default function FormDialogsTablaNest() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="inherit">
+          <Button onClick={handleCloseII} color="inherit">
             Cancel
           </Button>
           <Button onClick={handleClose} variant="contained">

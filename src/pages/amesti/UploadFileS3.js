@@ -41,16 +41,10 @@ export default function UploadFileS3() {
           />
         </Container>
       </Box>
-      <Container maxWidth="lg">
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={6}>
-            <NameUploadFileS3 />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <UploadS3 />
-          </Grid>
-        </Grid>
-      </Container>
+
+      <Grid item xs={12} md={6}>
+        <UploadS3 />
+      </Grid>
     </RootStyle>
   );
 }

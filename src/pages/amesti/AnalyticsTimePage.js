@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { any } from 'prop-types';
 import { styled } from '@mui/material/styles';
 import { Box, Grid, Card, Container, CardHeader, Stack } from '@mui/material';
+import AnalyticsTime from '../../components/amesti/AnalyticsTime';
 import { getTodosFiles, getTodosNest } from '../../redux/slices/todos-api';
 // routes
 
@@ -20,6 +21,7 @@ import DataGridBasicSelected from '../../components/amesti/data-grid/DataGridBas
 import { useDispatch, useSelector } from '../../redux/store';
 import { createEvent } from '../../redux/slices/amesti';
 import { GuardarModeloButtom, Tiempo } from '../../components/amesti';
+
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Page)(({ theme }) => ({
@@ -27,27 +29,13 @@ const RootStyle = styled(Page)(({ theme }) => ({
   paddingBottom: theme.spacing(15)
 }));
 
-export default function TableSelectedNest() {
-  const { user, token } = useAuth();
-  const dispatch = useDispatch();
-  const [files, setFiles] = useState([]);
-  const { load, cantidad, time, set } = useSelector((state) => state.amesti);
+export default function AnalyticsTimePage() {
+  // const { user, token } = useAuth();
+  // const dispatch = useDispatch();
+  // const [files, setFiles] = useState([]);
+  // const { load, cantidad, time, set, E } = useSelector((state) => state.amesti);
 
-  const fetchData = useCallback(async () => {
-    try {
-      const respo = await getTodosNest(token);
-      console.log(respo, 'THE RESPO');
-      setFiles(respo);
-    } catch (error) {
-      alert(error.message);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData, cantidad]);
-
-  const a = files.map((v, idx) => ({ ...v, id: idx }));
+  // const a = files.map((v, idx) => ({ ...v, id: idx }));
 
   return (
     <RootStyle title="Components: Table | Minimal-UI">
@@ -61,38 +49,14 @@ export default function TableSelectedNest() {
       >
         <Container maxWidth="lg">
           <HeaderBreadcrumbs
-            heading="Programa Nest disponibles para seleccionar el tiempo"
+            heading="Tiempo/Estufa"
             links={[{ name: 'Components', href: PATH_PAGE.components }, { name: 'DataGrid' }]}
           />
         </Container>
       </Box>
-      {files.length <= 0 ? (
-        <LoadingScreen size={32} color="info" />
-      ) : (
-        <Container maxWidth="lg">
-          <Stack spacing={5}>
-            <Card>
-              <CardHeader title="Programas Nest" />
-              <Box sx={{ height: 390 }}>
-                <DataGridBasicSelected files={a} />
-              </Box>
-            </Card>
-          </Stack>
-          <br />
-          {time ? (
-            <Container maxWidth="lg">
-              <Grid container spacing={2}>
-                <Grid item xs={12} md={6}>
-                  <Tiempo tiempo={time} files={a} />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <GuardarModeloButtom file={a} />
-                </Grid>
-              </Grid>
-            </Container>
-          ) : null}
-        </Container>
-      )}
+      <Container maxWidth="lg">
+        <AnalyticsTime />
+      </Container>
     </RootStyle>
   );
 }

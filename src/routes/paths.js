@@ -52,11 +52,13 @@ export const PATH_DASHBOARD = {
     editById: path(ROOTS_DASHBOARD, `/user/reece-chung/edit`),
     account: path(ROOTS_DASHBOARD, '/user/account')
   },
+
   amesti: {
     root: path(ROOTS_DASHBOARD, '/amesti'),
     uploadS3: path(ROOTS_DASHBOARD, '/amesti/uploadS3'),
     tableNestS3: path(ROOTS_DASHBOARD, '/amesti/tableNestS3'),
-    TableSelectedNest: path(ROOTS_DASHBOARD, '/amesti/TableSelectedNest')
+    TableSelectedNest: path(ROOTS_DASHBOARD, '/amesti/TableSelectedNest'),
+    AnalyticsTimePage: path(ROOTS_DASHBOARD, '/amesti/AnalyticsTimePage')
     // productById: path(ROOTS_DASHBOARD, '/e-commerce/product/nike-air-force-1-ndestrukt'),
     // list: path(ROOTS_DASHBOARD, '/e-commerce/list'),
     // newProduct: path(ROOTS_DASHBOARD, '/e-commerce/product/new'),

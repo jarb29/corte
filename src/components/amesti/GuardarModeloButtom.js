@@ -24,14 +24,17 @@ export default function GuardarModeloButtom(files) {
   };
 
   const handleClose = () => {
+    setOpen(false);
     const type = {
       MODELO: modelo.modelo,
       archivo,
       tiempo: time
     };
-
     dispatch(createTimeTable(type, token));
     console.log(type);
+  };
+
+  const handleCloseII = () => {
     setOpen(false);
   };
 
@@ -45,7 +48,7 @@ export default function GuardarModeloButtom(files) {
         open={open}
         TransitionComponent={Transition}
         keepMounted
-        onClose={handleClose}
+        onClose={handleCloseII}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
@@ -56,7 +59,7 @@ export default function GuardarModeloButtom(files) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button color="inherit" onClick={handleClose}>
+          <Button color="inherit" onClick={handleCloseII}>
             Cancelar
           </Button>
           <Button variant="contained" onClick={handleClose}>

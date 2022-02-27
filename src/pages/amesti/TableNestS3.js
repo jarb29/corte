@@ -1,10 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 
 // material
-import { any } from 'prop-types';
 import { styled } from '@mui/material/styles';
 import { Box, Card, Container, CardHeader, Stack } from '@mui/material';
-import { getTodosFiles, getTodosNest } from '../../redux/slices/todos-api';
 // routes
 
 import useAuth from '../../hooks/useAuth';
@@ -18,7 +16,7 @@ import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
 import CollapsibleTable from '../../components/amesti/table/collapsible-table';
 //
 import { useDispatch, useSelector } from '../../redux/store';
-import { createEvent } from '../../redux/slices/amesti';
+import { createEvent, getTodosFilestRedux } from '../../redux/slices/amesti';
 
 // ----------------------------------------------------------------------
 
@@ -30,29 +28,10 @@ const RootStyle = styled(Page)(({ theme }) => ({
 export default function TableNestS3() {
   const { user, token } = useAuth();
   const dispatch = useDispatch();
-  const [files, setFiles] = useState([]);
-  const { load, cantidad, time } = useSelector((state) => state.amesti);
-
-  const fetchData = useCallback(async () => {
-    try {
-      const response = await getTodosFiles(token);
-      const respo = await getTodosNest(token);
-
-      console.log(respo, ' THE NEST SELECTEDDDDDD');
-      setFiles(response);
-    } catch (error) {
-      alert(error.message);
-    }
-  }, []);
-
-  console.log(cantidad, load, 'CANTIDA');
+  const { load, cantidad, filesRedux } = useSelector((state) => state.amesti);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData, cantidad]);
-
-  useEffect(() => {
-    if (load !== 'undefined') {
+    if (load) {
       const tiempo = load['TIEMPO MECANIZADO NEST (min)'];
       const can = parseInt(cantidad, 10);
       const factor = load.CANTIDAD / can;
@@ -72,6 +51,10 @@ export default function TableNestS3() {
     }
   }, [dispatch, cantidad]);
 
+  useEffect(() => {
+    dispatch(getTodosFilestRedux(token));
+  }, [dispatch, cantidad]);
+
   return (
     <RootStyle title="Components: Table | Minimal-UI">
       <Box
@@ -89,14 +72,14 @@ export default function TableNestS3() {
           />
         </Container>
       </Box>
-      {files.length <= 0 ? (
+      {filesRedux.length <= 0 ? (
         <LoadingScreen size={32} color="info" />
       ) : (
         <Container maxWidth="lg">
           <Stack spacing={5}>
             <Card>
               <CardHeader title="Programas Nest" />
-              {files.map((file, id) => (
+              {filesRedux.map((file, id) => (
                 <CollapsibleTable key={id} files={file} />
               ))}
             </Card>

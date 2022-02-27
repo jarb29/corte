@@ -10,7 +10,10 @@ const initialState = {
   load: {},
   cantidad: 0,
   time: 0,
-  model: {}
+  model: {},
+  set: 0,
+  filesRedux: [],
+  estufaTime: []
 };
 
 const slice = createSlice({
@@ -37,6 +40,15 @@ const slice = createSlice({
     },
     hasModel(state, action) {
       state.model = action.payload;
+    },
+    hasSet(state, action) {
+      state.set = action.payload;
+    },
+    hasFile(state, action) {
+      state.filesRedux = action.payload;
+    },
+    hasEstufaTime(state, action) {
+      state.estufaTime = action.payload;
     }
   }
 });
@@ -45,15 +57,13 @@ const slice = createSlice({
 export default slice.reducer;
 
 // Actions
-export const { startLoading, hasCantidad, hasTime, hasModel } = slice.actions;
+export const { startLoading, hasCantidad, hasTime, hasModel, hasSet, hasFile, hasEstufaTime } = slice.actions;
 
 // ----------------------------------------------------------------------
 
 export function createEvent(newEvent, token) {
-  console.log(newEvent, 'CANTIDA');
+  console.log(newEvent, 'CANTIDAD');
   return async (dispatch) => {
-    // dispatch(slice.actions.startLoading());
-
     console.log('inside try');
     try {
       const response = await Axios.post(`${apiEndpoint}/todosnest`, JSON.stringify(newEvent), {
@@ -64,8 +74,36 @@ export function createEvent(newEvent, token) {
         }
       });
       console.log('inside try');
-      console.log(response);
-      // dispatch(slice.actions.createEventSuccess(response.data.event));
+      const miniSet = Math.random();
+      dispatch(slice.actions.hasSet(miniSet));
+      dispatch(slice.actions.startLoading());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+//-----------------------------------------------------------------------
+
+export function getTodosFilestRedux(idToken) {
+  console.log('Fetching todos from todosnest');
+
+  return async (dispatch) => {
+    // dispatch(slice.actions.startLoading());
+
+    console.log('inside try');
+    try {
+      const response = await Axios.get(`${apiEndpoint}/gettodos`, {
+        headers: {
+          'Content-Type': 'application/json',
+          // prettier-ignore
+          'Authorization': `Bearer ${idToken}`
+        }
+      });
+      dispatch(slice.actions.hasFile(response.data.items));
+      const miniSet = Math.random();
+      dispatch(slice.actions.hasSet(miniSet));
+      dispatch(slice.actions.startLoading({}));
     } catch (error) {
       console.log(error);
       // dispatch(slice.actions.hasError(error));
@@ -88,7 +126,7 @@ export function createTimeTable(newEvent, token) {
           'Authorization': `Bearer ${token}`
         }
       });
-      console.log('inside try');
+      console.log('inside timetable');
       console.log(response);
       // dispatch(slice.actions.createEventSuccess(response.data.event));
     } catch (error) {
@@ -99,12 +137,19 @@ export function createTimeTable(newEvent, token) {
 }
 
 //--------------------------------------------------------------------------
-export function getAllPosts() {
+export function getAllTimeEstufa(token) {
   return async (dispatch) => {
-    dispatch(slice.actions.startLoading());
     try {
-      const response = await axios.get('/api/blog/posts/all');
-      dispatch(slice.actions.getPostsSuccess(response.data.posts));
+      const response = await Axios.get(`${apiEndpoint}/estufatime`, {
+        headers: {
+          'Content-Type': 'application/json',
+          // prettier-ignore
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      console.log(response);
+      dispatch(slice.actions.hasEstufaTime(response.data.items));
     } catch (error) {
       dispatch(slice.actions.hasError(error));
     }
