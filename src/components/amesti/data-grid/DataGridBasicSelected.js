@@ -6,7 +6,7 @@ import moreVerticalFill from '@iconify/icons-eva/more-vertical-fill';
 import { DataGrid } from '@mui/x-data-grid';
 import { Box } from '@mui/material';
 // utils
-import { useDispatch, useSelector } from '../../../redux/store';
+import { useDispatch } from '../../../redux/store';
 import { hasTime, hasModel } from '../../../redux/slices/amesti';
 // components
 import { MIconButton } from '../../@material-extend';
@@ -80,7 +80,6 @@ const columns = [
 export default function DataGridBasicSelected(data) {
   const [selectionModel, setSelectionModel] = useState([]);
   const dispatch = useDispatch();
-  const { load, cantidad, model } = useSelector((state) => state.amesti);
 
   if (selectionModel) {
     let time = selectionModel.map((selected, idx) => parseFloat(data.files[selectionModel[idx]].tiempoPorEstufa));

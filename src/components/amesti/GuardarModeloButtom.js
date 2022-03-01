@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react';
+import { forwardRef, useState, useEffect } from 'react';
 
 // material
 import { Slide, Dialog, Button, DialogTitle, DialogActions, DialogContent, DialogContentText } from '@mui/material';
@@ -10,10 +10,10 @@ const Transition = forwardRef((props, ref) => <Slide direction="up" ref={ref} {.
 
 export default function GuardarModeloButtom(files) {
   const [open, setOpen] = useState(false);
-  const { user, token } = useAuth();
+  const { token } = useAuth();
   const dispatch = useDispatch();
 
-  const { load, cantidad, time, model } = useSelector((state) => state.amesti);
+  const { time, model } = useSelector((state) => state.amesti);
 
   const modelSelected = model.map((selected, idx) => files.file[model[idx]]);
   const archivo = model.map((selected, idx) => files.file[model[idx]].archivo);
@@ -31,8 +31,16 @@ export default function GuardarModeloButtom(files) {
       tiempo: time
     };
     dispatch(createTimeTable(type, token));
-    console.log(type);
   };
+
+  useEffect(() => {
+    const type = {
+      MODELO: modelo.modelo,
+      archivo,
+      tiempo: time
+    };
+    dispatch(createTimeTable(type, token));
+  }, [dispatch, token]);
 
   const handleCloseII = () => {
     setOpen(false);

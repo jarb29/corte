@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 // material
 import { Button, Dialog, TextField, DialogTitle, DialogContent, DialogActions, DialogContentText } from '@mui/material';
 
-import { useSelector, useDispatch } from '../../redux/store';
+import { useDispatch } from '../../redux/store';
 import { hasCantidad } from '../../redux/slices/amesti';
 
 // ----------------------------------------------------------------------
@@ -11,8 +11,6 @@ export default function FormDialogsTablaNest() {
   const dispatch = useDispatch();
   const valueRef = useRef('');
   const [open, setOpen] = useState(false);
-
-  const { load, cantidad } = useSelector((state) => state.amesti);
 
   const handleClickOpen = () => {
     setOpen(true);

@@ -13,7 +13,8 @@ const initialState = {
   model: {},
   set: 0,
   filesRedux: [],
-  estufaTime: []
+  estufaTime: [],
+  filesNest: []
 };
 
 const slice = createSlice({
@@ -47,6 +48,10 @@ const slice = createSlice({
     hasFile(state, action) {
       state.filesRedux = action.payload;
     },
+    hasNest(state, action) {
+      state.filesNest = action.payload;
+    },
+
     hasEstufaTime(state, action) {
       state.estufaTime = action.payload;
     }
@@ -57,7 +62,7 @@ const slice = createSlice({
 export default slice.reducer;
 
 // Actions
-export const { startLoading, hasCantidad, hasTime, hasModel, hasSet, hasFile, hasEstufaTime } = slice.actions;
+export const { startLoading, hasCantidad, hasTime, hasModel, hasSet, hasFile, hasNest, hasEstufaTime } = slice.actions;
 
 // ----------------------------------------------------------------------
 
@@ -73,7 +78,7 @@ export function createEvent(newEvent, token) {
           'Authorization': `Bearer ${token}`
         }
       });
-      console.log('inside try');
+      console.log(response);
       const miniSet = Math.random();
       dispatch(slice.actions.hasSet(miniSet));
       dispatch(slice.actions.startLoading());
@@ -104,6 +109,35 @@ export function getTodosFilestRedux(idToken) {
       const miniSet = Math.random();
       dispatch(slice.actions.hasSet(miniSet));
       dispatch(slice.actions.startLoading({}));
+    } catch (error) {
+      console.log(error);
+      // dispatch(slice.actions.hasError(error));
+    }
+  };
+}
+
+//-----------------------------------------------------------------------
+
+export function getTodosNest(idToken) {
+  console.log('Fetching todos from todosnest');
+
+  return async (dispatch) => {
+    // dispatch(slice.actions.startLoading());
+
+    console.log('inside try');
+    try {
+      console.log('Fetching todos from todosnest');
+
+      const response = await Axios.get(`${apiEndpoint}/getnest`, {
+        headers: {
+          'Content-Type': 'application/json',
+          // prettier-ignore
+          'Authorization': `Bearer ${idToken}`
+        }
+      });
+
+      console.log('Todos:', response);
+      dispatch(slice.actions.hasNest(response.data.items));
     } catch (error) {
       console.log(error);
       // dispatch(slice.actions.hasError(error));

@@ -34,9 +34,7 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-const TOTAL = 714000;
-
-export default function Tiempo(time, file) {
+export default function Tiempo(time) {
   const modelo = time.files[0];
   return (
     <RootStyle>

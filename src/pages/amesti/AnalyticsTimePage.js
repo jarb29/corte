@@ -1,26 +1,15 @@
-import { useState, useEffect, useCallback } from 'react';
-
 // material
-import { any } from 'prop-types';
 import { styled } from '@mui/material/styles';
-import { Box, Grid, Card, Container, CardHeader, Stack } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import AnalyticsTime from '../../components/amesti/AnalyticsTime';
-import { getTodosFiles, getTodosNest } from '../../redux/slices/todos-api';
 // routes
 
-import useAuth from '../../hooks/useAuth';
 import { PATH_PAGE } from '../../routes/paths';
 
-import LoadingScreen from '../../components/LoadingScreen';
 // components
 import Page from '../../components/Page';
 import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
 //
-import DataGridBasicSelected from '../../components/amesti/data-grid/DataGridBasicSelected';
-//
-import { useDispatch, useSelector } from '../../redux/store';
-import { createEvent } from '../../redux/slices/amesti';
-import { GuardarModeloButtom, Tiempo } from '../../components/amesti';
 
 // ----------------------------------------------------------------------
 
@@ -30,13 +19,6 @@ const RootStyle = styled(Page)(({ theme }) => ({
 }));
 
 export default function AnalyticsTimePage() {
-  // const { user, token } = useAuth();
-  // const dispatch = useDispatch();
-  // const [files, setFiles] = useState([]);
-  // const { load, cantidad, time, set, E } = useSelector((state) => state.amesti);
-
-  // const a = files.map((v, idx) => ({ ...v, id: idx }));
-
   return (
     <RootStyle title="Components: Table | Minimal-UI">
       <Box

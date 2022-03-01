@@ -1,10 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 
 // material
-import { any } from 'prop-types';
 import { styled } from '@mui/material/styles';
 import { Box, Grid, Card, Container, CardHeader, Stack } from '@mui/material';
-import { getTodosFiles, getTodosNest } from '../../redux/slices/todos-api';
 // routes
 
 import useAuth from '../../hooks/useAuth';
@@ -17,9 +15,9 @@ import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
 //
 import DataGridBasicSelected from '../../components/amesti/data-grid/DataGridBasicSelected';
 //
-import { useDispatch, useSelector } from '../../redux/store';
-import { createEvent } from '../../redux/slices/amesti';
+import { useSelector, useDispatch } from '../../redux/store';
 import { GuardarModeloButtom, Tiempo } from '../../components/amesti';
+import { createEvent, getTodosFilestRedux, getTodosNest } from '../../redux/slices/amesti';
 // ----------------------------------------------------------------------
 
 const RootStyle = styled(Page)(({ theme }) => ({
@@ -28,26 +26,40 @@ const RootStyle = styled(Page)(({ theme }) => ({
 }));
 
 export default function TableSelectedNest() {
-  const { user, token } = useAuth();
+  const { token } = useAuth();
+  const { cantidad, time, load, filesNest } = useSelector((state) => state.amesti);
   const dispatch = useDispatch();
-  const [files, setFiles] = useState([]);
-  const { load, cantidad, time, set } = useSelector((state) => state.amesti);
-
-  const fetchData = useCallback(async () => {
-    try {
-      const respo = await getTodosNest(token);
-      console.log(respo, 'THE RESPO');
-      setFiles(respo);
-    } catch (error) {
-      alert(error.message);
-    }
-  }, []);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData, cantidad]);
+    if (load) {
+      const tiempo = load['TIEMPO MECANIZADO NEST (min)'];
+      const can = parseInt(cantidad, 10);
+      const factor = load.CANTIDAD / can;
+      const tiempoEstufa = tiempo / factor;
+      const item = {
+        load,
+        cantidadPlancha: load.CANTIDAD,
+        pieza: load['NOMBRE PIEZA'],
+        modelo: load.MODELO,
+        programa: load['NOMBRE PROGRAMA:'],
+        piezasPorEstufa: cantidad,
+        tiempo: load['TIEMPO MECANIZADO NEST (min)'],
+        folder: load.FOLDER,
+        tiempoPorEstufa: tiempoEstufa.toFixed(2)
+      };
+      dispatch(createEvent(item, token));
+    }
+  }, [dispatch, cantidad, load, token]);
 
-  const a = files.map((v, idx) => ({ ...v, id: idx }));
+  useEffect(() => {
+    dispatch(getTodosNest(token));
+  }, [dispatch, cantidad, token]);
+
+  useEffect(() => {
+    dispatch(getTodosFilestRedux(token));
+  }, [dispatch, cantidad, token]);
+
+  const a = filesNest.map((v, idx) => ({ ...v, id: idx }));
 
   return (
     <RootStyle title="Components: Table | Minimal-UI">
@@ -66,7 +78,7 @@ export default function TableSelectedNest() {
           />
         </Container>
       </Box>
-      {files.length <= 0 ? (
+      {filesNest.length <= 0 ? (
         <LoadingScreen size={32} color="info" />
       ) : (
         <Container maxWidth="lg">

@@ -1,5 +1,4 @@
 import { isString } from 'lodash';
-import * as uuid from 'uuid';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import { useDropzone } from 'react-dropzone';
@@ -61,20 +60,7 @@ UploadMultiFile.propTypes = {
 
 export default function UploadMultiFile({ error, showPreview = false, files, onRemove, onRemoveAll, sx, ...other }) {
   const hasFile = files.length > 0;
-  const { user, token } = useAuth();
-
-  // const handleSubmit = async (file) => {
-  //   // const attachId = uuid.v4();
-  //   const attachId = file[0].path;
-
-  //   console.log(attachId, 'the id');
-  //   try {
-  //     const uploadUrl = await getUploadUrl(attachId);
-  //     await uploadFile(uploadUrl, file[0]);
-  //   } catch (e) {
-  //     alert(`Could not upload a file: ${e.message}`);
-  //   }
-  // };
+  const { token } = useAuth();
 
   const handleSubmit = async (files) => {
     files.forEach(async (element) => {

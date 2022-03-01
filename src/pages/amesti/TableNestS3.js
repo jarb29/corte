@@ -16,7 +16,7 @@ import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
 import CollapsibleTable from '../../components/amesti/table/collapsible-table';
 //
 import { useDispatch, useSelector } from '../../redux/store';
-import { createEvent, getTodosFilestRedux } from '../../redux/slices/amesti';
+import { createEvent, getTodosFilestRedux, getTodosNest, hasCantidad } from '../../redux/slices/amesti';
 
 // ----------------------------------------------------------------------
 
@@ -26,12 +26,13 @@ const RootStyle = styled(Page)(({ theme }) => ({
 }));
 
 export default function TableNestS3() {
-  const { user, token } = useAuth();
+  const { token } = useAuth();
   const dispatch = useDispatch();
   const { load, cantidad, filesRedux } = useSelector((state) => state.amesti);
 
+  console.log(cantidad, 'the cantidad');
   useEffect(() => {
-    if (load) {
+    if (cantidad > 0) {
       const tiempo = load['TIEMPO MECANIZADO NEST (min)'];
       const can = parseInt(cantidad, 10);
       const factor = load.CANTIDAD / can;
@@ -48,12 +49,17 @@ export default function TableNestS3() {
         tiempoPorEstufa: tiempoEstufa.toFixed(2)
       };
       dispatch(createEvent(item, token));
+      dispatch(hasCantidad(0));
     }
-  }, [dispatch, cantidad]);
+  }, [dispatch, cantidad, load, token]);
 
   useEffect(() => {
     dispatch(getTodosFilestRedux(token));
-  }, [dispatch, cantidad]);
+  }, [dispatch, cantidad, token]);
+
+  useEffect(() => {
+    dispatch(getTodosNest(token));
+  }, [dispatch, cantidad, token]);
 
   return (
     <RootStyle title="Components: Table | Minimal-UI">

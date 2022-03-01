@@ -11,28 +11,26 @@ import useAuth from '../../hooks/useAuth';
 import { BaseOptionChart } from '../charts';
 
 import { useSelector, useDispatch } from '../../redux/store';
-import { hasCantidad, getAllTimeEstufa } from '../../redux/slices/amesti';
+import { getAllTimeEstufa } from '../../redux/slices/amesti';
 
 // ----------------------------------------------------------------------
 
 // const CHART_DATA = [{ data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380] }];
 
-export default function AnalyticsTime(data) {
+export default function AnalyticsTime() {
   const dispatch = useDispatch();
-  const { user, token } = useAuth();
+  const { token } = useAuth();
 
   const { estufaTime } = useSelector((state) => state.amesti);
 
-  console.log(estufaTime, 'the time/estufa');
-
-  const modelo = estufaTime.map((mode, idx) => mode.MODELO);
-  const tiempo = estufaTime.map((mode, idx) => mode.tiempo);
+  const modelo = estufaTime.map((mode) => mode.MODELO);
+  const tiempo = estufaTime.map((mode) => mode.tiempo);
 
   const CHART_DATA = [{ data: tiempo }];
 
   useEffect(() => {
     dispatch(getAllTimeEstufa(token));
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   const chartOptions = merge(BaseOptionChart(), {
     tooltip: {

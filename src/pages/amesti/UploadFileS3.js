@@ -9,7 +9,7 @@ import HeaderBreadcrumbs from '../../components/HeaderBreadcrumbs';
 
 // import { Box, Grid, Checkbox, Container, TextField, Typography, Autocomplete } from '@mui/material';
 import Page from '../../components/Page';
-import { NameUploadFileS3, UploadS3 } from '../../components/amesti';
+import { UploadS3 } from '../../components/amesti';
 
 // ----------------------------------------------------------------------
 
